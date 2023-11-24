@@ -4,15 +4,13 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap demo</title>
+        <title>LexiQuiz</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     </head>
     <style>
         body {
             background-color: black;
-
-
         }
 
         hr {
@@ -20,35 +18,24 @@
         }
     </style>
 
-    <body class = "">
-        <div class="container">
-            <header class="px-20">
-                <nav class="navbar navbar-expand-lg">
-                    <div class="container">
-                        <a class="navbar-brand text-success" href="{{ url('/home') }}">LexiQuiz</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ms-auto">
-                                <li class="nav-item "><a class="nav-link active text-white" aria-current="page"
-                                        href="{{ url('/show-login') }}">Se connecter</a></li>
-                                <li class="nav-item"><a class="nav-link text-white"
-                                        href="{{ url('/register') }}">S'inscrire</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </header>
-            <hr>
-            <div class="container">
-                <h4 class="text-center text-white pb-4">Modifier son profil</h4>
-                <div class="row">
-                    <div class="col-md-3"></div>
 
-                    <div class="col">
+    <body class="bg-black">
+        <div class="container  p-5">
+            <div class="text-center">
+                <h1><a class="navbar-brand text-success" href="{{ url('/') }}">LexiQuiz</a></h1>
+            </div>
+            <div class="container pt-4">
+
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                <div class="row">
+                    <div class=" col-4  p-4 border  mx-auto rounded bg-white">
+                        <h4 class="text-center  pb-4">Modifier son profil</h4>
+
                         <form method="POST" action="{{ route('update-profil', ['id' => $user_id]) }}">
 
                             @method('PUT')
@@ -80,25 +67,32 @@
                                 <input type="password" class="form-control text-center" id="exampleInputPassword1"
                                     placeholder ="Password" name="password">
                             </div>
+
+                             <div class="mb-3 pt-3">
+                               
+                                <input class="form-control" type="file" name="file" id="formFile" placeholder ="Ajouter une photo">
+
+                            </div>
+
                             <div class="pt-4 row">
-                                <div class="text-center">
+                                <div class="d-flex justify-content-between">
+                                    <a href="{{ url()->previous() }}" class="btn btn-success">Retour</a>
+
+
                                     <button type="submit" class="btn btn-success">Modifier son profil</button>
+
                                 </div>
                             </div>
 
                         </form>
                     </div>
-                    <div class="col-md-3"></div>
+
+
+
                 </div>
 
 
             </div>
-            <hr>
-            <footer>
-                <div class="row">
-                    <span class="text-white text-center">© 2023 LexiQuiz </span>
-                </div>
-            </footer>
 
 
         </div>
@@ -106,5 +100,9 @@
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         </script>
     </body>
+
+
+
+
 
     </html>

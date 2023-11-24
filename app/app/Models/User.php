@@ -18,9 +18,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $email
  * @property string $password
  * @property string|null $avatar
+ * @property Carbon|null $lastdate
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property string $uid
+ * @property string|null $uid
+ * @property array|null $friends
  * 
  * @property Collection|Word[] $words
  *
@@ -29,6 +31,11 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
 	protected $table = 'users';
+
+	protected $casts = [
+		'lastdate' => 'datetime',
+		'friends' => 'json'
+	];
 
 	protected $hidden = [
 		'password'
@@ -39,13 +46,15 @@ class User extends Model
 		'email',
 		'password',
 		'avatar',
-		'uid'
+		'lastdate',
+		'uid',
+		'friends'
 	];
 
 	public function words()
 	{
 		return $this->belongsToMany(Word::class, 'user_words', 'users_id', 'words_id')
-					->withPivot('id', 'score')
+					->withPivot('id', 'score', 'response', 'note', 'found_word')
 					->withTimestamps();
 	}
 }

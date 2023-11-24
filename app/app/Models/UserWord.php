@@ -16,6 +16,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $users_id
  * @property int $words_id
  * @property int $score
+ * @property bool|null $response
+ * @property int|null $note
+ * @property bool $found_word
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
@@ -31,13 +34,19 @@ class UserWord extends Model
 	protected $casts = [
 		'users_id' => 'int',
 		'words_id' => 'int',
-		'score' => 'int'
+		'score' => 'int',
+		'response' => 'bool',
+		'note' => 'int',
+		'found_word' => 'bool'
 	];
 
 	protected $fillable = [
 		'users_id',
 		'words_id',
-		'score'
+		'score',
+		'response',
+		'note',
+		'found_word'
 	];
 
 	public function user()

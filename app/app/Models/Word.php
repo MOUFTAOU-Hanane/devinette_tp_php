@@ -39,7 +39,7 @@ class Word extends Model
 	public function users()
 	{
 		return $this->belongsToMany(User::class, 'user_words', 'words_id', 'users_id')
-					->withPivot('id', 'score')
+					->withPivot('id', 'score', 'response', 'note', 'found_word')
 					->withTimestamps();
 	}
 }
